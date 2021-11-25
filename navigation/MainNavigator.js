@@ -10,7 +10,9 @@ const Tab = createMaterialBottomTabNavigator();
 
 function TabNavigator(){
   return(
-    <Tab.Navigator>
+    <Tab.Navigator
+      initialRouteName="Listener 2"
+    >
       <Tab.Screen
         name="Listener 1"
         component={ListenerScreen1}

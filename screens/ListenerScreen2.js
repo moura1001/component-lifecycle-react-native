@@ -1,9 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
+
+import { listener2 } from '../utils/listeners';
 
 export default function ListenerScreen2() {
   const [updateCount, setUpdateCount] = useState(0);
   const [listenerName, setListenerName] = useState("cat");
+
+  useEffect(() => {
+    setUpdateCount(0);
+
+    const unsubscribe = listener2(listenerName, () => {
+      setUpdateCount(currentCount => currentCount + 1);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [listenerName]);
 
   return (
     <View style={styles.container}>

@@ -13,3 +13,19 @@ export const listener = (fn = () => { }) => {
     }
   };
 };
+
+export const listener2 = (name, fn = () => {}) => {
+  console.log(`subscribing to ${name} listener...`);
+  const interval = setInterval(() => {
+    console.log(`${name} listener updating`);
+    fn();
+  }, 500);
+
+  return () => {
+    if (interval) {
+      console.log(`unsubscribing from ${name} listener...`);
+
+      clearInterval(interval);
+    }
+  };
+};
